@@ -31,5 +31,6 @@ jobs:
       - name: Build latest update from upstream
         run: |
           chmod +x ./update.sh
-          ls 
+          modprobe fuse
+          cat /etc/passwd
           bash ./update.sh
