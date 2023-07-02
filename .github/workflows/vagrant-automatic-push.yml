@@ -16,7 +16,7 @@ jobs:
       options: --privileged
     steps:
       - name: Checkout codebase
-        run: actions/checkout@v3
+        uses: actions/checkout@v3
           # TODO: Build automatically inside an ArchLinux Chroot
       - name: Install all latest dependencies in container
         run: |
