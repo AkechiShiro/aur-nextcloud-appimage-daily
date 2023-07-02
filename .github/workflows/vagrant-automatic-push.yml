@@ -20,6 +20,7 @@ jobs:
           # TODO: Build automatically inside an ArchLinux Chroot
       - name: Install all latest dependencies in container
         run: |
+          pacman-key --init
           pacman -Syu --noconfirm
           pacman -S --noconfirm zlib curl p7zip hicolor-icon-theme wget bash base-devel git fuse2 pacman-contrib 
       - name: Git clone from AUR
@@ -31,4 +32,4 @@ jobs:
         run: |
           chmod +x ./update.sh
           ls 
-          bash ./update.sh --verbose
+          bash ./update.sh
