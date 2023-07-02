@@ -18,7 +18,7 @@ jobs:
       - name: Git clone from AUR
         run: git clone https://aur.archlinux.org/nextcloud-client-appimage-daily.git
       - name: Checkout codebase
-        action: actions/checkout@v3
+        run: actions/checkout@v3
           # TODO: Build automatically inside an ArchLinux Chroot
       - name: Install all latest dependencies in container
         run: |
