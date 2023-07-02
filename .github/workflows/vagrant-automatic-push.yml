@@ -15,8 +15,6 @@ jobs:
       image: archlinux:latest
       options: --privileged
     steps:
-      - name: Git clone from AUR
-        run: git clone https://aur.archlinux.org/nextcloud-client-appimage-daily.git
       - name: Checkout codebase
         run: actions/checkout@v3
           # TODO: Build automatically inside an ArchLinux Chroot
@@ -24,6 +22,8 @@ jobs:
         run: |
           pacman -Syu --noconfirm
           pacman -S --noconfirm zlib curl p7zip hicolor-icon-theme wget bash base-devel 
+      - name: Git clone from AUR
+        run: git clone https://aur.archlinux.org/nextcloud-client-appimage-daily.git
       - name: Chmod update script
         run: "chmod +x ./update.sh && ./update.sh"
       # INSERT step to setup git config from ENV variable containing secrets????
