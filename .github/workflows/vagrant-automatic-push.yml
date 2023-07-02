@@ -22,8 +22,8 @@ jobs:
       - name: Install all latest dependencies in container
         run: |
           pacman -S --noconfirm zlib curl p7zip hicolor-icon-theme wget bash base-devel git fuse2 pacman-contrib libx11 xorg-server fontconfig tar zip
-      - name: Git clone from AUR
-        run: git clone https://aur.archlinux.org/nextcloud-client-appimage-daily.git
+          #- name: Git clone from AUR
+          #  run: git clone https://aur.archlinux.org/nextcloud-client-appimage-daily.git
       # INSERT step to setup git config from ENV variable containing secrets????
       # TODO: Find if that's a good solution ^ or to avoid in terms of security
       # Read a lot of documentation and blogs...
@@ -31,7 +31,5 @@ jobs:
       - name: Build latest update from upstream
         run: |
           chmod +x ./update.sh
-          cat ./update.sh
-          cat /etc/passwd
           ls 
           bash ./update.sh
