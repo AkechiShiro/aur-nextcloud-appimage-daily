@@ -22,7 +22,7 @@ jobs:
         run: |
           pacman-key --init
           pacman -Syu --noconfirm
-          pacman -S --noconfirm zlib curl p7zip hicolor-icon-theme wget bash base-devel git fuse2 pacman-contrib 
+          pacman -S --noconfirm zlib curl p7zip hicolor-icon-theme wget bash base-devel git fuse2 pacman-contrib libx11 xorg-server
       - name: Git clone from AUR
         run: git clone https://aur.archlinux.org/nextcloud-client-appimage-daily.git
       # INSERT step to setup git config from ENV variable containing secrets????
