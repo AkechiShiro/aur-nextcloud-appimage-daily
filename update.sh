@@ -1,4 +1,5 @@
-#!/usr/bin/env -vS bash
+#!/usr/bin/bash
+set -x
 cd nextcloud-client-appimage-daily || echo "Failed to CD" && exit 1
 ls -lah
 url="https://download.nextcloud.com/desktop/daily/linux/"
