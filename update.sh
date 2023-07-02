@@ -8,6 +8,8 @@ echo "pkg:$pkgnew, date:$pkgver_date"
 chmod a+x "./$pkgnew"
 "./$pkgnew" --appimage-extract
 # TODO: Find version from AppRun
+# Fix for : https://github.com/NVlabs/instant-ngp/discussions/300
+export QT_QPA_PLATFORM=offscreen
 real_pkgver=$("./squashfs-root/AppRun" -v | sed -nE "s/^Nextcloud version ([0-9]*\.[0-9]*\.[0-9]*) (.*)$/\1/p")
 sed -Ei "1,\$s|^(pkgver=).*|\1$real_pkgver.$pkgver_date|" PKGBUILD
 updpkgsums ./PKGBUILD
