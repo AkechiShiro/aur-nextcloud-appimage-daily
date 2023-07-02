@@ -19,14 +19,15 @@ jobs:
           # TODO: Build automatically inside an ArchLinux Chroot
       - name: Install all latest dependencies in container
         run: |
-          sudo pacman-key --init
-          sudo pacman -Syu --noconfirm
-          sudo pacman -S --noconfirm zlib curl p7zip hicolor-icon-theme wget bash base-devel git fuse2 pacman-contrib libx11 xorg-server fontconfig
+          pacman-key --init
+          pacman -Syu --noconfirm
+          pacman -S --noconfirm zlib curl p7zip hicolor-icon-theme wget bash base-devel git fuse2 pacman-contrib libx11 xorg-server fontconfig
       - name: Git clone from AUR
         run: git clone https://aur.archlinux.org/nextcloud-client-appimage-daily.git
       # INSERT step to setup git config from ENV variable containing secrets????
       # TODO: Find if that's a good solution ^ or to avoid in terms of security
       # Read a lot of documentation and blogs...
+      # TODO: Forced to use chroot because we are the root user in the container
       - name: Build latest update from upstream
         run: |
           chmod +x ./update.sh
