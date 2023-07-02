@@ -1,11 +1,15 @@
 #!/usr/bin/env bash
+cd nextcloud-client-appimage-daily.git || echo "Failed to CD" && exit 1
+ls -lah
 url="https://download.nextcloud.com/desktop/daily/linux/"
 pkgnew=$(curl -s $url | tail -n 5 | sed -nE 's/.*href=\"(linux-[^\-]*)">.*/\1/p')
 pkgver_date=$(curl -s $url | tail -n 5 | sed -nE 's/.*href=\"linux-([^\-]*).AppImage">.*/\1/p')
 echo "pkg:$pkgnew, date:$pkgver_date"
 [[ -f "$pkgnew" ]] || wget "$url/$pkgnew"
 chmod a+x "./$pkgnew"
-real_pkgver=$("./$pkgnew" -v | sed -nE "s/^Nextcloud version ([0-9]*\.[0-9]*\.[0-9]*) (.*)$/\1/p")
+"./$pkgnew" --appimage-extract
+# TODO: Find version from AppRun
+real_pkgver=$("./squashfs-root/AppRun" -v | sed -nE "s/^Nextcloud version ([0-9]*\.[0-9]*\.[0-9]*) (.*)$/\1/p")
 sed -Ei "1,\$s|^(pkgver=).*|\1$real_pkgver.$pkgver_date|" PKGBUILD
 updpkgsums ./PKGBUILD
 makepkg --printsrcinfo > .SRCINFO

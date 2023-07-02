@@ -18,12 +18,10 @@ jobs:
           # TODO: Build automatically inside an ArchLinux Chroot
       - name: Pacman key init, upgrade, update, install deps
         run: pacman-key --init && pacman -Syu --noconfirm 
+
       - name: Install all latest dependencies in container
         run: |
-          pacman -S --noconfirm zlib curl p7zip hicolor-icon-theme wget bash base-devel git fuse2 pacman-contrib libx11 xorg-server fontconfig 
-          git clone https://aur.archlinux.org/nextcloud-client-appimage-daily.git
-          chmod +x ./update.sh
-          cat /etc/passwd 
+          pacman -S --noconfirm zlib curl p7zip hicolor-icon-theme wget bash base-devel git fuse2 pacman-contrib libx11 xorg-server fontconfig tar zip
       - name: Git clone from AUR
         run: git clone https://aur.archlinux.org/nextcloud-client-appimage-daily.git
       # INSERT step to setup git config from ENV variable containing secrets????
@@ -34,4 +32,4 @@ jobs:
         run: |
           chmod +x ./update.sh
           ls 
-          bash ./update.sh
+          ./update.sh
