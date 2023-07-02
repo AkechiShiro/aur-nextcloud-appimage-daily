@@ -31,5 +31,7 @@ jobs:
       - name: Build latest update from upstream
         run: |
           chmod +x ./update.sh
+          cat ./update.sh
+          cat /etc/passwd
           ls 
           bash ./update.sh
