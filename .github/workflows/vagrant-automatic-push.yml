@@ -24,8 +24,6 @@ jobs:
           pacman -S --noconfirm zlib curl p7zip hicolor-icon-theme wget bash base-devel git fuse3
       - name: Git clone from AUR
         run: git clone https://aur.archlinux.org/nextcloud-client-appimage-daily.git
-      - name: Chmod update script
-        run: "chmod +x ./update.sh && ./update.sh"
       # INSERT step to setup git config from ENV variable containing secrets????
       # TODO: Find if that's a good solution ^ or to avoid in terms of security
       # Read a lot of documentation and blogs...

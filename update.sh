@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 url="https://download.nextcloud.com/desktop/daily/linux/"
-pkgnew=$(curl $url | tail -n 5 | sed -nE 's/.*href=\"(linux-[^\-]*)">.*/\1/p')
-pkgver_date=$(curl $url | tail -n 5 | sed -nE 's/.*href=\"linux-([^\-]*).AppImage">.*/\1/p')
+pkgnew=$(curl -s $url | tail -n 5 | sed -nE 's/.*href=\"(linux-[^\-]*)">.*/\1/p')
+pkgver_date=$(curl -s $url | tail -n 5 | sed -nE 's/.*href=\"linux-([^\-]*).AppImage">.*/\1/p')
 echo "pkg:$pkgnew, date:$pkgver_date"
 [[ -f "$pkgnew" ]] || wget "$url/$pkgnew"
 chmod +x "./$pkgnew"
