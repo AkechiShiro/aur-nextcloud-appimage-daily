@@ -11,31 +11,27 @@ on:
 jobs:
   Update-AppImage:
     runs-on: ubuntu-latest
+    container: archlinux:latest
     steps:
-      - name: Install FUSE on Host CI
-        run : | 
-          sudo apt-get update
-          sudo apt-get install fuse
-          sudo modprobe fuse
       - name: Checkout codebase
         uses: actions/checkout@v3
           # TODO: Build automatically inside an ArchLinux Chroot
-      - name: Use docker ArchLinux container for all the following
-        uses: docker://archlinux:latest
-        with:
-          entrypoint: /usr/bin/bash
-          args: pacman-key --init && pacman -Syu --noconfirm && pacman -S --noconfirm zlib curl p7zip hicolor-icon-theme wget bash base-devel git fuse2 pacman-contrib libx11 xorg-server fontconfig && git clone https://aur.archlinux.org/nextcloud-client-appimage-daily.git && chmod +x ./update.sh && modprobe fuse && cat /etc/passwd && bash ./update.sh
-          #- name: Install all latest dependencies in container
-          #   run: |
-          # - name: Git clone from AUR
-          #   run: git clone https://aur.archlinux.org/nextcloud-client-appimage-daily.git
+      - name: Pacman key init, upgrade, update, install deps
+        run: pacman-key --init && pacman -Syu --noconfirm 
+      - name: Install all latest dependencies in container
+        run: |
+          pacman -S --noconfirm zlib curl p7zip hicolor-icon-theme wget bash base-devel git fuse2 pacman-contrib libx11 xorg-server fontconfig 
+          git clone https://aur.archlinux.org/nextcloud-client-appimage-daily.git
+          chmod +x ./update.sh
+          cat /etc/passwd 
+      - name: Git clone from AUR
+        run: git clone https://aur.archlinux.org/nextcloud-client-appimage-daily.git
       # INSERT step to setup git config from ENV variable containing secrets????
       # TODO: Find if that's a good solution ^ or to avoid in terms of security
       # Read a lot of documentation and blogs...
       # TODO: Forced to use chroot because we are the root user in the container
-      #- name: Build latest update from upstream
-      #  run: |
-      #    chmod +x ./update.sh
-      #    modprobe fuse
-      #    cat /etc/passwd
-      #    bash ./update.sh
+      - name: Build latest update from upstream
+        run: |
+          chmod +x ./update.sh
+          ls 
+          bash ./update.sh
