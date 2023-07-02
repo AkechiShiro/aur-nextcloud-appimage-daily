@@ -14,6 +14,10 @@ jobs:
     container:
       image: archlinux:latest
     steps:
+      - name: Install FUSE on Host CI
+        run : | 
+          sudo apt-get update
+          sudo apt-get install fuse
       - name: Checkout codebase
         uses: actions/checkout@v3
           # TODO: Build automatically inside an ArchLinux Chroot
