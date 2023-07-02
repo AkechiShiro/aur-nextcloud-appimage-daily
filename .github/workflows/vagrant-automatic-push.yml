@@ -35,7 +35,7 @@ jobs:
       # TODO: Forced to use chroot because we are the root user in the container
       #- name: Build latest update from upstream
       #  run: |
-          chmod +x ./update.sh
-          modprobe fuse
-          cat /etc/passwd
-          bash ./update.sh
+      #    chmod +x ./update.sh
+      #    modprobe fuse
+      #    cat /etc/passwd
+      #    bash ./update.sh
