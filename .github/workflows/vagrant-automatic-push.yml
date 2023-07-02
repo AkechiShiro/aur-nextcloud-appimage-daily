@@ -21,7 +21,7 @@ jobs:
       - name: Install all latest dependencies in container
         run: |
           pacman -Syu --noconfirm
-          pacman -S --noconfirm zlib curl p7zip hicolor-icon-theme wget bash base-devel git
+          pacman -S --noconfirm zlib curl p7zip hicolor-icon-theme wget bash base-devel git fuse3
       - name: Git clone from AUR
         run: git clone https://aur.archlinux.org/nextcloud-client-appimage-daily.git
       - name: Chmod update script
