@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-cd nextcloud-client-appimage-daily.git || echo "Failed to CD" && exit 1
+cd nextcloud-client-appimage-daily || echo "Failed to CD" && exit 1
 ls -lah
 url="https://download.nextcloud.com/desktop/daily/linux/"
 pkgnew=$(curl -s $url | tail -n 5 | sed -nE 's/.*href=\"(linux-[^\-]*)">.*/\1/p')
