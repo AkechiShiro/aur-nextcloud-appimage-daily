@@ -1,13 +1,12 @@
----
-name: Build ArchLinux zfs iso with LTS-Kernel and DKMS Package
+name: Build Nextcloud from upstream daily and push to AUR latest release
+
 on:
-  schedule:  # arch relases are published first day of the month
-    - cron: '50 23 1 * *'
-  workflow_dispatch:
-  pull_request:
-    types:
-      - closed
   push:
+    branches: ["main"]
+  pull_request: 
+    branches: ["main"]
+
+  workflow_dispatch:
 
 jobs:
   Update-AppImage:
