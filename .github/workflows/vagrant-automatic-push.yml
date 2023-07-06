@@ -37,6 +37,7 @@ jobs:
       - name: Build latest update from upstream
         run: |
           su makepkg-user
+          whoami
           chmod +x ./update.sh
           ls 
-          bash ./update.sh
+          su makepkg-user -c "bash ./update.sh"
