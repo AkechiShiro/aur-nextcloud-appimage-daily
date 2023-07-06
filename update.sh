@@ -14,7 +14,7 @@ real_pkgver=$(strings ./squashfs-root/AppRun | sed -nE "s/^([0-9]\.[0-9]\.[0-9][
 sed -Ei "1,\$s|^(pkgver=).*|\1$real_pkgver.$pkgver_date|" PKGBUILD
 updpkgsums ./PKGBUILD
 makepkg --printsrcinfo > .SRCINFO
-makepkg PKGBUILD --clean --cleanbuild --force -si 
+makepkg PKGBUILD --clean --cleanbuild --force
 # TODO: Figure out a way to push to the AUR the upgrade safely without putting any creds plain text
 # DevSecOps, gotta to improve those skills cause why not
 
