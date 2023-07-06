@@ -26,7 +26,9 @@ jobs:
         run: |
           groups
           cat /etc/passwd
-          adduser makepkg-user
+          chmod a+rwx ./update.sh
+          chmod a+rwx -R .
+          useradd makepkg-user
           su makepkg-user
           #- name: Git clone from AUR
           #  run: git clone https://aur.archlinux.org/nextcloud-client-appimage-daily.git
