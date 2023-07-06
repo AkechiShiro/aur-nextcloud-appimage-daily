@@ -10,7 +10,7 @@ chmod a+x "./$pkgnew"
 # TODO: Find version from AppRun
 # Fix for : https://github.com/NVlabs/instant-ngp/discussions/300
 export QT_QPA_PLATFORM=offscreen
-real_pkgver=$(strings AppRun | sed -nE "s/^([0-9]\.[0-9]\.[0-9][0-9]\.[0-9]*)/\1/p")
+real_pkgver=$(strings ./squashfs-root/AppRun | sed -nE "s/^([0-9]\.[0-9]\.[0-9][0-9]\.[0-9]*)/\1/p")
 sed -Ei "1,\$s|^(pkgver=).*|\1$real_pkgver.$pkgver_date|" PKGBUILD
 updpkgsums ./PKGBUILD
 makepkg --printsrcinfo > .SRCINFO

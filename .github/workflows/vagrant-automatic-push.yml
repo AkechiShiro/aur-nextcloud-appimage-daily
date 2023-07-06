@@ -22,6 +22,12 @@ jobs:
       - name: Install all latest dependencies in container
         run: |
           pacman -S --noconfirm zlib curl p7zip hicolor-icon-theme wget bash base-devel git fuse2 pacman-contrib libx11 xorg-server fontconfig pipewire alsa-lib qt6-base qt5-base
+      - name: Create a user for makepkg usage
+        run: |
+          groups
+          cat /etc/passwd
+          adduser makepkg-user
+          su makepkg-user
           #- name: Git clone from AUR
           #  run: git clone https://aur.archlinux.org/nextcloud-client-appimage-daily.git
       # INSERT step to setup git config from ENV variable containing secrets????
