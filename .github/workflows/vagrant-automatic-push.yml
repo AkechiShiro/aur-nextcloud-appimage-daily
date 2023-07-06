@@ -24,12 +24,10 @@ jobs:
           pacman -S --noconfirm zlib curl p7zip hicolor-icon-theme wget bash base-devel git fuse2 pacman-contrib libx11 xorg-server fontconfig pipewire alsa-lib qt6-base qt5-base
       - name: Create a user for makepkg usage
         run: |
-          groups
-          cat /etc/passwd
           chmod a+rwx ./update.sh
           chmod a+rwx -R .
           useradd makepkg-user
-          su makepkg-user
+          cat /etc/passwd
           #- name: Git clone from AUR
           #  run: git clone https://aur.archlinux.org/nextcloud-client-appimage-daily.git
       # INSERT step to setup git config from ENV variable containing secrets????
@@ -38,6 +36,7 @@ jobs:
       # TODO: Forced to use chroot because we are the root user in the container
       - name: Build latest update from upstream
         run: |
+          su makepkg-user
           chmod +x ./update.sh
           ls 
           bash ./update.sh
