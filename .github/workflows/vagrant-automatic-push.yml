@@ -21,7 +21,7 @@ jobs:
 
       - name: Install all latest dependencies in container
         run: |
-          pacman -S --noconfirm zlib curl p7zip hicolor-icon-theme wget bash base-devel git fuse2 pacman-contrib libx11 xorg-server fontconfig pipewire alsa-lib qt6-base qt5-base
+          pacman -S --noconfirm zlib curl p7zip wget bash base-devel git pacman-contrib
       - name: Create a user for makepkg usage
         run: |
           chmod a+rwx ./update.sh
