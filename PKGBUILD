@@ -3,7 +3,7 @@
 # Contributor: Sebastian Wieland <wieland.s[at]online[dot]de>
 _pkgname=nextcloud
 pkgname=${_pkgname}-client-appimage-daily
-pkgver=.20231101
+pkgver=20231101
 _appimgname=linux-${pkgver##*.}
 pkgrel=1
 epoch=1
