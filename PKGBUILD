@@ -26,7 +26,8 @@ prepare() {
 
     # Extract relevant files from AppImage
     7z x -y ${_pkgname}-${pkgver}.AppImage usr/share/icons > /dev/null
-    7z x -y ${_pkgname}-${pkgver}.AppImage com.${_pkgname}.desktopclient.${_pkgname}.desktop > /dev/null
+    7z x -y ${_pkgname}-${pkgver}.AppImage usr/share/applications/com.${_pkgname}.desktopclient.${_pkgname}.desktop > /dev/null
+    mv usr/share/applications/com.${_pkgname}.desktopclient.${_pkgname}.desktop com.${_pkgname}.desktopclient.${_pkgname}.desktop
 }
 
 package() {
