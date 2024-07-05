@@ -58,6 +58,9 @@ jobs:
           # Push to AUR the update
           git status
           git checkout master
-          git add -A . && git commit -m "Update to latest version" && git push origin upstream
+          git add -A PKGBUILD .SRCINFO 
+          git commit -m "Update to latest version" 
+          git status
+          git push -u origin master
           #- name: Git Push
           #  run: git push origin master
