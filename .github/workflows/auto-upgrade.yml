@@ -41,3 +41,12 @@ jobs:
           chmod +x ./update.sh
           ls 
           su makepkg-user -c "bash ./update.sh"
+          # Push to AUR the update
+          git remote add upstream ssh://aur@aur.archlinux.org/nextcloud-client-appimage-daily.git
+          git fetch upstream
+          git checkout upstream
+          mkdir -p ~/.ssh
+          echo $${{ secret.SSH_PRIVATE_KEY }} >> ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          git add -A . && git commit -m "Update to latest version" #&& git push origin upstream
+          git status
