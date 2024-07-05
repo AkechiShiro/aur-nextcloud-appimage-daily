@@ -39,7 +39,7 @@ jobs:
           git config --global user.email "14914796+AkechiShiro@users.noreply.github.com"
           git config --global user.name "Automatic GitHub CI"
       - name: Git clone from AUR
-        run: git clone ssh://aur@aur.archlinux.org/nextcloud-client-appimage-daily.git
+        run: GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=accept-new" git clone ssh://aur@aur.archlinux.org/nextcloud-client-appimage-daily.git
       # INSERT step to setup git config from ENV variable containing secrets????
       # TODO: Find if that's a good solution ^ or to avoid in terms of security
       # Read a lot of documentation and blogs...
