@@ -50,6 +50,8 @@ jobs:
           chmod +x ./update.sh
           su makepkg-user -c "bash ./update.sh"
           # Move into AUR git repo
+      - name: Copy updated scripts to AUR repo and commit
+        run: |
           cd nextcloud-client-appimage-daily
           cp ../PKGBUILD ./
           cp ../.SRCINFO ./
@@ -57,5 +59,5 @@ jobs:
           git status
           git checkout master
           git add -A . && git commit -m "Update to latest version" #&& git push origin upstream
-          git status
-          git diff
+      - name: Git Push
+        run: git push origin master
