@@ -50,7 +50,7 @@ jobs:
           git config --global init.defaultBranch master
           git config --global user.email "14914796+AkechiShiro@users.noreply.github.com"
           git config --global user.name "Automatic GitHub CI"
-          git fetch master
+          git status
           git checkout master
           git add -A . && git commit -m "Update to latest version" #&& git push origin upstream
           git status
