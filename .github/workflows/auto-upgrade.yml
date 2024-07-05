@@ -34,6 +34,11 @@ jobs:
           chmod a+rwx ./update.sh
           chmod a+rwx -R .
           useradd makepkg-user
+      - name: Git configuration
+        run: |
+          git config --global init.defaultBranch master
+          git config --global user.email "14914796+AkechiShiro@users.noreply.github.com"
+          git config --global user.name "Automatic GitHub CI"
       - name: Git clone from AUR
         run: git clone https://aur.archlinux.org/nextcloud-client-appimage-daily.git
       # INSERT step to setup git config from ENV variable containing secrets????
@@ -46,10 +51,9 @@ jobs:
           su makepkg-user -c "bash ./update.sh"
           # Move into AUR git repo
           cd nextcloud-client-appimage-daily
+          cp ../PKGBUILD ./
+          cp ../.SRCINFO ./
           # Push to AUR the update
-          git config --global init.defaultBranch master
-          git config --global user.email "14914796+AkechiShiro@users.noreply.github.com"
-          git config --global user.name "Automatic GitHub CI"
           git status
           git checkout master
           git add -A . && git commit -m "Update to latest version" #&& git push origin upstream
