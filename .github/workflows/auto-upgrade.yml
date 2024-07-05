@@ -23,7 +23,7 @@ jobs:
 
       - name: Install all latest dependencies in container
         run: |
-          pacman -S --noconfirm zlib curl p7zip wget bash base-devel git pacman-contrib ssh-agent
+          pacman -S --noconfirm zlib curl p7zip wget bash base-devel git pacman-contrib openssh
       - name: Restart gpg-server as it may be old
         run : gpgconf --kill all
       - uses: webfactory/ssh-agent@v0.9.0
