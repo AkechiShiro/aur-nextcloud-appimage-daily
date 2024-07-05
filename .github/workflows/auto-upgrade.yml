@@ -6,10 +6,9 @@ on:
   pull_request: 
     branches: ["main"]
   schedule:
-    - cron: "30 8 * * *"   # Every day at 8:30 UTC run update
-
-  workflow_dispatch:
-
+    - cron: "15 4 * * *"   # Every day at 04:15 UTC run update
+      # Update everyday consistently around 4:01 upstream
+      # https://download.nextcloud.com/desktop/daily/linux/
 jobs:
   Update-AppImage:
     runs-on: ubuntu-latest
