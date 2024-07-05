@@ -6,7 +6,7 @@ pkgver_date=$(curl -s $url | tail -n 5 | sed -nE 's/.*href=\"linux-([^\-]*).AppI
 echo "pkg:$pkgnew, date:$pkgver_date"
 [[ -f "$pkgnew" ]] || wget "$url/$pkgnew"
 chmod a+x "./$pkgnew"
-"./$pkgnew" --appimage-extract
+"./$pkgnew" --appimage-extract 2&>/dev/null
 # TODO: Find version from AppRun
 # Fix for : https://github.com/NVlabs/instant-ngp/discussions/300
 export QT_QPA_PLATFORM=offscreen
