@@ -58,6 +58,6 @@ jobs:
           # Push to AUR the update
           git status
           git checkout master
-          git add -A . && git commit -m "Update to latest version" #&& git push origin upstream
-      - name: Git Push
-        run: git push origin master
+          git add -A . && git commit -m "Update to latest version" && git push origin upstream
+          #- name: Git Push
+          #  run: git push origin master
