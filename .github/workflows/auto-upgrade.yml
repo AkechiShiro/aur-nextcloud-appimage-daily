@@ -11,6 +11,7 @@ on:
 jobs:
   Update-AppImage:
     runs-on: ubuntu-latest
+    environment: CI_PROD
     container: archlinux:latest
     steps:
       - name: Checkout codebase
