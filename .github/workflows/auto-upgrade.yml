@@ -14,8 +14,12 @@ jobs:
     container: archlinux:latest
     steps:
       - name: Checkout codebase
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
           # TODO: Build automatically inside an ArchLinux Chroot
+          # Use ssh-agent for private key
+      - uses: webfactory/ssh-agent@v0.9.0
+        with:
+            ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: Pacman key init, upgrade, update, install deps
         run: pacman-key --init && pacman -Syu --noconfirm 
 
@@ -27,26 +31,21 @@ jobs:
           chmod a+rwx ./update.sh
           chmod a+rwx -R .
           useradd makepkg-user
-          cat /etc/passwd
-          #- name: Git clone from AUR
-          #  run: git clone https://aur.archlinux.org/nextcloud-client-appimage-daily.git
+      - name: Git clone from AUR
+        run: git clone https://aur.archlinux.org/nextcloud-client-appimage-daily.git
       # INSERT step to setup git config from ENV variable containing secrets????
       # TODO: Find if that's a good solution ^ or to avoid in terms of security
       # Read a lot of documentation and blogs...
       # TODO: Forced to use chroot because we are the root user in the container
       - name: Build latest update from upstream
         run: |
-          su makepkg-user
-          whoami
           chmod +x ./update.sh
-          ls 
           su makepkg-user -c "bash ./update.sh"
+          # Move into AUR git repo
+          cd nextcloud-client-appimage-daily
           # Push to AUR the update
-          git remote add upstream ssh://aur@aur.archlinux.org/nextcloud-client-appimage-daily.git
-          git fetch upstream
-          git checkout upstream
-          mkdir -p ~/.ssh
-          echo $${{ secrets.SSH_PRIVATE_KEY }} >> ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
+          git fetch origin
+          git checkout origin
           git add -A . && git commit -m "Update to latest version" #&& git push origin upstream
           git status
+          git diff
