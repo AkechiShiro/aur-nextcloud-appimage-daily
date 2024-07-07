@@ -63,6 +63,7 @@ jobs:
           git status
           git push -u origin master
       - name: Git Push
-        run: | cd ../
+        run: | 
+          cd ..
           git status
           git push origin master
