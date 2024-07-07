@@ -63,6 +63,6 @@ jobs:
           git status
           git checkout master
           git add -A PKGBUILD .SRCINFO 
-          pkgnew=$(sed -Ei "1,\$s|^(pkgver=).*|\1$pkgver_date|" PKGBUILD) git commit -m "Update to $pkgnew" 
+          git diff-index --quiet HEAD || pkgnew=$(sed -Ei "1,\$s|^(pkgver=).*|\1$pkgver_date|" PKGBUILD) git commit -m "Update to $pkgnew" 
           git status
           git push -u origin master
