@@ -18,8 +18,8 @@ jobs:
     steps:
       - name: Checkout codebase
         uses: actions/checkout@v4
-        path: '~/repo'
         with:
+          path: '~/repo'
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           ref: ${{ github.event.pull_request.head.ref }}
           # TODO: Build automatically inside an ArchLinux Chroot
