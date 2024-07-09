@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: Checkout codebase
         uses: actions/checkout@v4
+        repository: ${{ github.event.pull_request.head.repo.full_name }}
+        ref: ${{ github.event.pull_request.head.ref }}
           # TODO: Build automatically inside an ArchLinux Chroot
           # Use ssh-agent for private key
       - name: Pacman key init, upgrade, update to latest
@@ -66,6 +68,7 @@ jobs:
           git diff-index --quiet HEAD || pkgnew=$(sed -Ei "1,\$s|^(pkgver=).*|\1$pkgver_date|" PKGBUILD) git commit -m "Update to $pkgnew" 
           git status
           git push -u origin master
+          cd ..
       - uses: EndBug/add-and-commit@v9
         with:
          # The arguments for the `git add` command (see the paragraph below for more info)
