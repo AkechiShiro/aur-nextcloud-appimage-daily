@@ -13,12 +13,14 @@ jobs:
   Update-AppImage:
     runs-on: ubuntu-latest
     environment: CI_PROD
-    container: archlinux:latest
+    container: 
+      image: archlinux:latest
     steps:
       - name: Checkout codebase
         uses: actions/checkout@v4
-        repository: ${{ github.event.pull_request.head.repo.full_name }}
-        ref: ${{ github.event.pull_request.head.ref }}
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.ref }}
           # TODO: Build automatically inside an ArchLinux Chroot
           # Use ssh-agent for private key
       - name: Pacman key init, upgrade, update to latest
