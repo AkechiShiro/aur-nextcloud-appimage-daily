@@ -71,6 +71,7 @@ jobs:
           git status
           git push -u origin master
           cd ..
+          cd ..
       - uses: EndBug/add-and-commit@v9
         with:
          # The arguments for the `git add` command (see the paragraph below for more info)
