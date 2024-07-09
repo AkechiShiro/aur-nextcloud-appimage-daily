@@ -16,16 +16,15 @@ jobs:
     container: 
       image: archlinux:latest
     steps:
+      - name: Pacman key init, upgrade, update to latest
+        run: pacman-key --init && pacman -Syu --noconfirm && pacman -S git
       - name: Checkout codebase
         uses: actions/checkout@v4
         with:
-          path: '~/repo'
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           ref: ${{ github.event.pull_request.head.ref }}
           # TODO: Build automatically inside an ArchLinux Chroot
           # Use ssh-agent for private key
-      - name: Pacman key init, upgrade, update to latest
-        run: pacman-key --init && pacman -Syu --noconfirm 
       - name: After update, restart gpg-server as it may be old
         run : gpgconf --kill all
       - name: Install all latest dependencies in container
@@ -36,7 +35,6 @@ jobs:
             ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: Create a user for makepkg usage
         run: |
-          cd repo
           chmod a+rwx ./update.sh
           chmod a+rwx -R .
           useradd makepkg-user
@@ -72,7 +70,8 @@ jobs:
           git diff-index --quiet HEAD || pkgnew=$(sed -Ei "1,\$s|^(pkgver=).*|\1$pkgver_date|" PKGBUILD) git commit -m "Update to $pkgnew" 
           git status
           git push -u origin master
-          cd ~/repo
+          cd ..
+          cd ..
       - uses: EndBug/add-and-commit@v9
         with:
          # The arguments for the `git add` command (see the paragraph below for more info)
