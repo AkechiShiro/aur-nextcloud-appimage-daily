@@ -3,8 +3,6 @@ name: Build Nextcloud from upstream daily and push to AUR latest release
 on:
   push:
     branches: ["main"]
-  pull_request: 
-    branches: ["main"]
   schedule:
     - cron: "15 4 * * *"   # Every day at 04:15 UTC run update
       # Update everyday consistently around 4:01 upstream
