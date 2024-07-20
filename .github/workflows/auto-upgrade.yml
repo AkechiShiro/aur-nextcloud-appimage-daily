@@ -30,6 +30,8 @@ jobs:
       - name: Install all latest dependencies in container
         run: |
           pacman -S --noconfirm zlib curl p7zip wget bash base-devel git pacman-contrib openssh
+      - name: pwd (DEBUG)
+        run: pwd
       - uses: webfactory/ssh-agent@v0.9.0
         with:
             ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -72,6 +74,8 @@ jobs:
           git push -u origin master
           cd ..
           cd ..
+          pwd
+          git config --global --add safe.directory /__w/aur-nextcloud-appimage-daily/aur-nextcloud-appimage-daily
       - uses: EndBug/add-and-commit@v9
         with:
          # The arguments for the `git add` command (see the paragraph below for more info)
