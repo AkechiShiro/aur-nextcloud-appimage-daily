@@ -16,7 +16,7 @@ jobs:
     container: 
       image: archlinux:latest
     steps:
-      - name: Pacman key init, upgrade, update to latest
+      - name: Pacman key init, upgrade/update, install git
         run: pacman-key --init && pacman -Syu --noconfirm && pacman -S --noconfirm git
       - name: Checkout codebase
         uses: actions/checkout@v4
@@ -27,11 +27,9 @@ jobs:
           # Use ssh-agent for private key
       - name: After update, restart gpg-server as it may be old
         run : gpgconf --kill all
-      - name: Install all latest dependencies in container
+      - name: Install all PKGBUILD deps
         run: |
           pacman -S --noconfirm zlib curl p7zip wget bash base-devel git pacman-contrib openssh
-      - name: pwd (DEBUG)
-        run: pwd
       - uses: webfactory/ssh-agent@v0.9.0
         with:
             ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -74,13 +72,12 @@ jobs:
           git push -u origin master
           cd ..
           cd ..
-          pwd
           git config --global --add safe.directory /__w/aur-nextcloud-appimage-daily/aur-nextcloud-appimage-daily
       - uses: EndBug/add-and-commit@v9
         with:
          # The arguments for the `git add` command (see the paragraph below for more info)
          # Default: '.'
-         add: '-A'
+         add: 'PKGBUILD .SRCINFO'
 
          # The name of the user that will be displayed as the author of the commit.
          # Default: depends on the default_author input
