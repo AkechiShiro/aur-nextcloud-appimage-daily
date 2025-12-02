@@ -28,7 +28,7 @@ jobs:
       - name: Install all PKGBUILD deps
         run: |
           pacman -S --noconfirm zlib curl p7zip wget bash base-devel git pacman-contrib openssh
-      - uses: webfactory/ssh-agent@v0.9.0
+      - uses: webfactory/ssh-agent@v0.9.1
         with:
             ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: Create a user for makepkg usage
