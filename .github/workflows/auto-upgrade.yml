@@ -71,7 +71,7 @@ jobs:
           cd ..
           cd ..
           git config --global --add safe.directory /__w/aur-nextcloud-appimage-daily/aur-nextcloud-appimage-daily
-      - uses: EndBug/add-and-commit@v9
+      - uses: EndBug/add-and-commit@v10
         with:
          # The arguments for the `git add` command (see the paragraph below for more info)
          # Default: '.'
